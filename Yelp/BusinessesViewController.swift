@@ -52,12 +52,9 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         let business = businesses[indexPath.row]
-        
+        // Restaurant Name + Rating Image + Address + Category
+        return 125.0
     }
-    func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
-    }
-    
 
     /*
     // MARK: - Navigation
