@@ -8,31 +8,43 @@
 
 import UIKit
 
-class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class BusinessesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var searchBar: UISearchBar!
     
     var businesses: [Business]! = [Business]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchBar = UISearchBar()
+        searchBar.delegate = self
+        navigationItem.titleView = searchBar
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Filter", style: .Plain, target: self, action: nil)
+        
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 120.0
+        
+        search("Restaurants")
 
-        Business.searchWithTerm("Restaurants", sort: .Distance, categories: ["asianfusion", "burgers"], deals: true) { (businesses: [Business]!, error: NSError!) -> Void in
-            self.businesses = businesses
-            self.tableView.reloadData()
-            for business in businesses {
-                println(business.name!)
-                println(business.address!)
-            }
-        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func search(searchTerm: String) {
+        Business.searchWithTerm(searchTerm, sort: .Distance, categories: [], deals: false) { (businesses: [Business]!, error: NSError!) -> Void in
+            self.businesses = businesses
+            self.tableView.reloadData()
+        }
+        
+        searchBar.endEditing(true)
     }
     
     // MARK: - UITableViewDataSource methods
@@ -47,13 +59,10 @@ class BusinessesViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.setFields(business)
         return cell
     }
-
-    // MARK: - UITableViewDelegate methods
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        let business = businesses[indexPath.row]
-        // Restaurant Name + Rating Image + Address + Category
-        return 125.0
+    // MARK: - UISearchBarDelegate methods
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        search(searchBar.text)
     }
 
     /*

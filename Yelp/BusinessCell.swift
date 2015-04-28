@@ -44,7 +44,8 @@ class BusinessCell: UITableViewCell {
         addressLabel.text = business.address
         categoryLabel.text = business.categories
         distanceLabel.text = business.distance
-        dollazLabel.text = "WHAT"        
+        
+        dollazLabel.text = "$$"
     }
 
 }
