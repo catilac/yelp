@@ -137,7 +137,13 @@
                             <constraint firstItem="VBY-gq-v8E" firstAttribute="top" secondItem="PcX-jh-fl6" secondAttribute="bottom" id="gNz-ZU-Tjq"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="6i3-W0-Lje"/>
+                    <navigationItem key="navigationItem" id="6i3-W0-Lje">
+                        <barButtonItem key="leftBarButtonItem" title="Filter" id="YCA-g3-eyi">
+                            <connections>
+                                <segue destination="TLM-zC-4B9" kind="modal" id="ndX-aE-bfI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="tableView" destination="PcX-jh-fl6" id="urv-Ia-HRd"/>
@@ -146,6 +152,75 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fgb-4b-F1b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1298" y="356"/>
+        </scene>
+        <!--Filters View Controller-->
+        <scene sceneID="QBo-tJ-Lgy">
+            <objects>
+                <viewController id="TLM-zC-4B9" customClass="FiltersViewController" customModule="Yelp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SYn-8Y-7uw"/>
+                        <viewControllerLayoutGuide type="bottom" id="yBe-S9-kMu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="tm0-OY-AJI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5rZ-7O-dXm">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Filters" id="muI-Q3-pXT">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="k4p-gr-661">
+                                            <connections>
+                                                <action selector="pressedCancel:" destination="TLM-zC-4B9" id="Psp-xv-hjI"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Search" id="oDh-Vp-fRO">
+                                            <connections>
+                                                <action selector="pressedSearch:" destination="TLM-zC-4B9" id="HJj-SG-d8J"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="pio-K6-ptd">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="BoolFilterCell" id="zvK-f7-CMf" customClass="BoolFilterCell" customModule="Yelp" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zvK-f7-CMf" id="rG9-WT-UBV">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kiL-b8-3qC">
+                                                    <rect key="frame" x="318" y="6" width="51" height="31"/>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="boolSwitch" destination="kiL-b8-3qC" id="kDc-Jn-41U"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FilterCell" id="wLH-R5-7fa">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="wLH-R5-7fa" id="9Hj-67-sjJ">
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="tableView" destination="pio-K6-ptd" id="xCz-bL-JnC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X4L-gk-2Rq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1818.5" y="343.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="acQ-8B-spy">
